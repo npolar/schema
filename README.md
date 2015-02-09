@@ -41,6 +41,23 @@ URI:                                   | Points to:                  | Descripti
 **http://schema.domain/bar/baz**       | *schema/bar/baz/1.0.0.json* | **symlink** to **current** schema version
 **http://schema.domain/bar**           |                             | Schema does not exist
 
+#### Alternate path structure:
+This alternate proposal keeps all schema versions on the root directory, maintaining schema names in file names:
+
+URI:                                   | Points to:                  | Description:
+---------------------------------------|-----------------------------|-----------------------------------------------
+**http://schema.domain/foo/1.2.1**     | *schema/foo-1.2.1.json*     | **older** schema version
+**http://schema.domain/foo/1.2.2**     | *schema/foo-1.2.2.json*     | **older** schema version
+**http://schema.domain/foo/1.3.0**     | *schema/foo-1.3.0.json*     | **previous** schema version
+**http://schema.domain/foo/1.3.1**     | *schema/foo-1.3.1.json*     | **current** schema version
+**http://schema.domain/foo/1.2**       | *schema/foo-1.2.2.json*     | **symlink** to **latest 1.2.x** schema version
+**http://schema.domain/foo/1.3**       | *schema/foo-1.3.1.json*     | **symlink** to **latest 1.3.x** schema version
+**http://schema.domain/foo**           | *schema/foo-1.3.1.json*     | **symlink** to **current** schema version
+**http://schema.domain/bar/baz/1.0.0** | *schema/bar/baz-1.0.0.json* | **current** schema version
+**http://schema.domain/bar/baz/1.0**   | *schema/bar/baz-1.0.0.json* | **symlink** to **latest 1.0.x** schema version
+**http://schema.domain/bar/baz**       | *schema/bar/baz-1.0.0.json* | **symlink** to **current** schema version
+**http://schema.domain/bar**           |                             | Schema does not exist
+
 #### Updating symlinks:
 Symlinks can automatically be updated by running the **update.sh** script:
 ```bash
