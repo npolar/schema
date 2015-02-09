@@ -8,10 +8,10 @@ for FILE in */*.json */**/*.json; do
 		LINK="$(dirname $FILE)/${BASH_REMATCH[1]}.json"
 		
 		if [ ! -h $LINK ]; then
-			echo "  Creating minor-version symlink: $LINK -> $FILE"
+			echo "Creating minor-version symlink: $LINK -> $FILE"
 			ln -sr $FILE $LINK
 		elif [[ $(basename $FILE) > $(basename $(readlink $LINK)) ]]; then
-			echo "  Updating minor-version symlink: $LINK -> $FILE"
+			echo "Updating minor-version symlink: $LINK -> $FILE"
 			ln -sfr $FILE $LINK
 		fi
 	fi
@@ -25,10 +25,10 @@ for FILE in */*.json */**/*.json; do
 		LINK="$(dirname $FILE).json"
 		
 		if [ ! -h $LINK ]; then
-			echo "  Creating major-version symlink: $LINK -> $FILE"
+			echo "Creating major-version symlink: $LINK -> $FILE"
 			ln -sr $FILE $LINK
-		elif [[ $(readlink $(basename $FILE)) > $(basename $(readlink $LINK)) ]]; then
-			echo "  Updating major-version symlink: $LINK -> $FILE"
+		elif [[ $(readlink $FILE) > $(basename $(readlink $LINK)) ]]; then
+			echo "Updating major-version symlink: $LINK -> $FILE"
 			ln -sfr $FILE $LINK
 		fi
 	fi
