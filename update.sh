@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
 # Update minor-version symlinks
 for FILE in *.json */*.json */**/*.json; do

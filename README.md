@@ -61,5 +61,5 @@ URI:                                   | Points to:                  | Descripti
 #### Updating symlinks:
 Symlinks can automatically be updated by running the **update.sh** script:
 ```bash
-sh update.sh
+./update.sh
 ```
