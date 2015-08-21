@@ -2,9 +2,9 @@
 JSON Schema management structure with versioning
 
 #### Path structure:
-Symlinks to the latest schemas available are located in the same directory as the versioned schema versions, stripped from the version numbers, and ending in **.json**. Additionally, symlinks to the latest *build*-version of each schema are named with the corresponding **&lt;major&gt;.&lt;minor&gt;.json** name scheme.
+Versioned schemas are named as follows: **&lt;name&gt;-&lt;major&gt;.&lt;minor&gt;.&lt;build&gt;.json**, using the versioning scheme as described below. Server-side rewrite rules allows access to versioned schemas using a URI path structure without the trailing *.json* suffix, also described further down. Any schema hierarchy depth is supported for abstract grouping.
 
-Specific schema versions are named as follows: **&lt;major&gt;.&lt;minor&gt;.&lt;build&gt;.json**, using the versioning scheme as described below.
+Symlinks to the latest schemas available are located in the same directory as the versioned schema versions, stripped from the version numbers, and ending in **.json**. Additionally, symlinks to the latest *build*-version of each schema are named with the corresponding **&lt;major&gt;.&lt;minor&gt;.json** name scheme.
 
 #### Versioning scheme:
 * **Major** - Increased for *breaking* changes in the schema, such as:
@@ -44,3 +44,5 @@ Symlinks can automatically be updated by running the **update.sh** script:
 ```bash
 ./update.sh
 ```
+
+Note that the preferred versioning scheme accepts three distinct version numbers, thus making schemas using this convention the primary choice. The *update.sh* script does however support single and dual numered versions as well.
