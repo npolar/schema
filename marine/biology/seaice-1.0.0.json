@@ -91,7 +91,7 @@
 					"description": "Ice concentration in area (FYI/MYI)"
 				},
 				"snow_depth": {
-					"type": "string",
+					"type": "number",
 					"description": "Maximum snow depth in metres"
 				}
 			},
