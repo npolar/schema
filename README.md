@@ -1,12 +1,10 @@
 # schema
-Proposal for new (JSON) schema management with versioning
+JSON Schema management structure with versioning
 
 #### Path structure:
-Symlinks to the latest schemas available are located in the root of each directory, using the same name as the correct directory, ending in **.json**.
-Additionally, symlinks to the latest *build*-version of each schema are named with the corresponding **&lt;major&gt;.&lt;minor&gt;.json** name scheme.
+Versioned schemas are named as follows: **&lt;name&gt;-&lt;major&gt;.&lt;minor&gt;.&lt;build&gt;.json**, using the versioning scheme as described below. Server-side rewrite rules allows access to versioned schemas using a URI path structure without the trailing *.json* suffix, also described further down. Any schema hierarchy depth is supported for abstract grouping.
 
-Specific versions of schemas are located in schema-separated sub-directories, named as follows:<br/>
-**&lt;major&gt;.&lt;minor&gt;.&lt;build&gt;.json**, using the correct versioning scheme as described below.
+Symlinks to the latest schemas available are located in the same directory as the versioned schema versions, stripped from the version numbers, and ending in **.json**. Additionally, symlinks to the latest *build*-version of each schema are named with the corresponding **&lt;major&gt;.&lt;minor&gt;.json** name scheme.
 
 #### Versioning scheme:
 * **Major** - Increased for *breaking* changes in the schema, such as:
@@ -23,43 +21,28 @@ Specific versions of schemas are located in schema-separated sub-directories, na
 * **Build** - Increased for *non*-breaking adjustments in the schema, such as:
   * Typo fixes in meta-fields
   * Indentation clean-up
+  
+#### HTTP request path structure:
+HTTP requests should use the correct schema path structure (optionally with the **.json** suffix) as follows:
 
-#### Proposed HTTP request paths:
-HTTP requests should use the correct schema path structure, without the **.json** suffix, as follows:
-
-URI:                                   | Points to:                  | Description:
----------------------------------------|-----------------------------|-----------------------------------------------
-**http://schema.domain/foo/1.2.1**     | *schema/foo/1.2.1.json*     | **older** schema version
-**http://schema.domain/foo/1.2.2**     | *schema/foo/1.2.2.json*     | **older** schema version
-**http://schema.domain/foo/1.3.0**     | *schema/foo/1.3.0.json*     | **previous** schema version
-**http://schema.domain/foo/1.3.1**     | *schema/foo/1.3.1.json*     | **current** schema version
-**http://schema.domain/foo/1.2**       | *schema/foo/1.2.2.json*     | **symlink** to **latest 1.2.x** schema version
-**http://schema.domain/foo/1.3**       | *schema/foo/1.3.1.json*     | **symlink** to **latest 1.3.x** schema version
-**http://schema.domain/foo**           | *schema/foo/1.3.1.json*     | **symlink** to **current** schema version
-**http://schema.domain/bar/baz/1.0.0** | *schema/bar/baz/1.0.0.json* | **current** schema version
-**http://schema.domain/bar/baz/1.0**   | *schema/bar/baz/1.0.0.json* | **symlink** to **latest 1.0.x** schema version
-**http://schema.domain/bar/baz**       | *schema/bar/baz/1.0.0.json* | **symlink** to **current** schema version
-**http://schema.domain/bar**           |                             | Schema does not exist
-
-#### Alternate path structure:
-This alternate proposal keeps all schema versions on the root directory, maintaining schema names in file names:
-
-URI:                                   | Points to:                  | Description:
----------------------------------------|-----------------------------|-----------------------------------------------
-**http://schema.domain/foo/1.2.1**     | *schema/foo-1.2.1.json*     | **older** schema version
-**http://schema.domain/foo/1.2.2**     | *schema/foo-1.2.2.json*     | **older** schema version
-**http://schema.domain/foo/1.3.0**     | *schema/foo-1.3.0.json*     | **previous** schema version
-**http://schema.domain/foo/1.3.1**     | *schema/foo-1.3.1.json*     | **current** schema version
-**http://schema.domain/foo/1.2**       | *schema/foo-1.2.2.json*     | **symlink** to **latest 1.2.x** schema version
-**http://schema.domain/foo/1.3**       | *schema/foo-1.3.1.json*     | **symlink** to **latest 1.3.x** schema version
-**http://schema.domain/foo**           | *schema/foo-1.3.1.json*     | **symlink** to **current** schema version
-**http://schema.domain/bar/baz/1.0.0** | *schema/bar/baz-1.0.0.json* | **current** schema version
-**http://schema.domain/bar/baz/1.0**   | *schema/bar/baz-1.0.0.json* | **symlink** to **latest 1.0.x** schema version
-**http://schema.domain/bar/baz**       | *schema/bar/baz-1.0.0.json* | **symlink** to **current** schema version
-**http://schema.domain/bar**           |                             | Schema does not exist
+URI:                                           | Points to:           | Description:
+-----------------------------------------------|----------------------|-----------------------------------------------
+**http://api.npolar.no/_schema/foo/1.2.1**     | *foo-1.2.1.json*     | **older** schema version
+**http://api.npolar.no/_schema/foo/1.2.2**     | *foo-1.2.2.json*     | **older** schema version
+**http://api.npolar.no/_schema/foo/1.3.0**     | *foo-1.3.0.json*     | **previous** schema version
+**http://api.npolar.no/_schema/foo/1.3.1**     | *foo-1.3.1.json*     | **current** schema version
+**http://api.npolar.no/_schema/foo/1.2**       | *foo-1.2.2.json*     | **symlink** to **latest 1.2.x** schema version
+**http://api.npolar.no/_schema/foo/1.3**       | *foo-1.3.1.json*     | **symlink** to **latest 1.3.x** schema version
+**http://api.npolar.no/_schema/foo**           | *foo-1.3.1.json*     | **symlink** to **current** schema version
+**http://api.npolar.no/_schema/bar/baz/1.0.0** | *bar/baz-1.0.0.json* | **current** schema version
+**http://api.npolar.no/_schema/bar/baz/1.0**   | *bar/baz-1.0.0.json* | **symlink** to **latest 1.0.x** schema version
+**http://api.npolar.no/_schema/bar/baz**       | *bar/baz-1.0.0.json* | **symlink** to **current** schema version
+**http://api.npolar.no/_schema/bar**           |                      | Schema does not exist
 
 #### Updating symlinks:
 Symlinks can automatically be updated by running the **update.sh** script:
 ```bash
 ./update.sh
 ```
+
+Note that the preferred versioning scheme accepts three distinct version numbers, thus making schemas using this convention the primary choice. The *update.sh* script does however support single and dual numered versions as well.
