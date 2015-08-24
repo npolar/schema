@@ -2,6 +2,7 @@
 	"title": "Sea Ice Macrofauna Schema",
 	"description": "Schema for macrofauna comprising invertebrateds (>2 mm) that live associated with or in sea ice",
 	"$schema": "http://json-schema.org/draft-04/schema#",
+	"id": "https://api.npolar.no/_schema/marine/biology/seaice/1.0",
 	"type": "object",
 	"properties": {
 		"title": {
@@ -215,7 +216,7 @@
 		},
 		"comments": {
 			"type": "string",
-			"description": "Additinal comments"
+			"description": "Additional comments"
 		},
 		"obis_id": {
 			"type": "integer"
