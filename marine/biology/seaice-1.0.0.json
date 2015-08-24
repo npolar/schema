@@ -154,7 +154,7 @@
 								"description": "Specimen type"
 							},
 							"count": {
-								"type": "integer",
+								"type": "number",
 								"description": "Number of specimen individes in sample"
 							},
 							"data": {
