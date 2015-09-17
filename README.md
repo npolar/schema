@@ -15,13 +15,13 @@ Symlinks to the latest schemas available are located in the same directory as th
 * **Minor** - Increased for *non*-breaking changes in the schema, such as:
   * Addition of *non*-required key/value pairs
   * Addition of meta-fields (e.g. descriptions, titles etc.)
-  * Addedion of enum options
+  * Addition of enum options
   * Change of string formats **(with caution)**
   * Change of number ranges **(with caution)**
 * **Build** - Increased for *non*-breaking adjustments in the schema, such as:
   * Typo fixes in meta-fields
   * Indentation clean-up
-  
+
 #### HTTP request path structure:
 HTTP requests should use the correct schema path structure (optionally with the **.json** suffix) as follows:
 
