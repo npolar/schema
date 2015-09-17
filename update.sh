@@ -3,7 +3,7 @@
 # Update minor-version symlinks
 for FILE in *.json */*.json */**/*.json; do
 	EXPR='^([0-9]{1,3}\.[0-9]{1,3})\.[0-9]{1,3}\.json$'
-	ALT_EXPR='^([^-]+)-([0-9]{1,3}\.[0-9]{1,3})\.[0-9]{1,3}\.json$'
+	ALT_EXPR='^(.+)-([0-9]{1,3}\.[0-9]{1,3})\.[0-9]{1,3}\.json$'
 	
 	if [[ $(basename $FILE) =~ $EXPR ]]; then
 		LINK="$(dirname $FILE)/${BASH_REMATCH[1]}.json"
@@ -31,7 +31,7 @@ done
 # Update major-version symlinks
 for FILE in *.json */*.json */**/*.json; do
 	EXPR='^[0-9]{1,3}\.[0-9]{1,3}\.json$'
-	ALT_EXPR='^([^-]+)-[0-9]{1,3}\.[0-9]{1,3}\.json$'
+	ALT_EXPR='^(.+)-[0-9]{1,3}\.[0-9]{1,3}\.json$'
 
 	if [[ $(basename $FILE) =~ $EXPR ]]; then
 		LINK="$(dirname $FILE).json"
