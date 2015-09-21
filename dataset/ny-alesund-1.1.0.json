@@ -173,19 +173,6 @@
         "type":"object",
         "additionalProperties":false,
         "properties":{
-          "activity":{
-            "description":"Start and stop of data collection. For year registration use January 1ste as the date.",
-            "type":"array",
-            "additionalItems":false,
-            "items":{
-              "type":"object",
-              "additionalProperties":false,
-              "properties":{
-                "start":{"type":["string", "null"], "format":"date-time"},
-                "stop":{"type":["string", "null"],  "format":"date-time"}
-              }
-            }
-          },
           "placename":{
             "type":"string"
           },
@@ -198,6 +185,19 @@
             "type":"number",
             "minimum":10.4,
             "maximum":14.0
+          },
+          "activity":{
+            "description":"Start and stop of data collection. For year registration use January 1ste as the date.",
+            "type":"array",
+            "additionalItems":false,
+            "items":{
+              "type":"object",
+              "additionalProperties":false,
+              "properties":{
+                "start":{"type":["string", "null"], "format":"date-time"},
+                "stop":{"type":["string", "null"],  "format":"date-time"}
+              }
+            }
           }
         }
       }
