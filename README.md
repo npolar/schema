@@ -41,8 +41,14 @@ URI:                                           | Points to:           | Descript
 
 #### Updating symlinks:
 Symlinks can automatically be updated by running the **update.sh** script:
-```bash
+```sh
 ./update.sh
 ```
 
 Note that the preferred versioning scheme accepts three distinct version numbers, thus making schemas using this convention the primary choice. The *update.sh* script does however support single and dual numered versions as well.
+
+#### Production deployment:
+For users in the **wheel** group, deployment is done on the **api**-server by a simple *git pull*:
+```sh
+cd /srv/_schema && git pull
+```
